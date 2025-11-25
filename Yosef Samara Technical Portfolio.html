@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Technical Portfolio – Yosef Samara</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg-gradient: linear-gradient(135deg, #eef2ff, #f9fafb);
+      --card-bg: #ffffff;
+      --primary: #1d4ed8;
+      --primary-soft: #e0ebff;
+      --text-main: #0f172a;
+      --text-muted: #6b7280;
+      --border: #e5e7eb;
+      --accent: #0ea5e9;
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.08);
+      --shadow-light: 0 10px 30px rgba(15, 23, 42, 0.05);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding: 24px 10px 40px;
+    }
+
+    .page {
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .header-wrapper {
+      margin-bottom: 26px;
+    }
+
+    .header {
+      background: radial-gradient(circle at top left, #e0ebff, #ffffff);
+      border-radius: var(--radius-lg);
+      padding: 22px 26px 18px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 120% 0%, rgba(14, 165, 233, 0.12), transparent 55%);
+      pointer-events: none;
+    }
+
+    .header-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .header-top {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .title-block {
+      max-width: 70%;
+    }
+
+    .title-label {
+      font-size: 0.78rem;
+      letter-spacing: 0.17em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .title {
+      font-size: 1.9rem;
+      font-weight: 750;
+      color: var(--primary);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .name {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-top: 4px;
+    }
+
+    .subtitle {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 14px;
+      background: rgba(248, 250, 252, 0.9);
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      font-size: 0.78rem;
+      color: #475569;
+      font-weight: 500;
+      backdrop-filter: blur(4px);
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.25);
+    }
+
+    .header-bottom {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 18px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .header-item {
+      display: flex;
+      gap: 6px;
+      align-items: baseline;
+    }
+
+    .header-label {
+      font-weight: 500;
+      color: #4b5563;
+    }
+
+    a.link {
+      color: var(--primary);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.15s ease, color 0.15s ease;
+    }
+
+    a.link:hover {
+      border-color: var(--primary);
+      color: #1d4ed8;
+    }
+
+    /* Layout grid */
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 64%) minmax(0, 36%);
+      gap: 20px;
+      margin-top: 6px;
+    }
+
+    @media (max-width: 900px) {
+      .layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .title-block {
+        max-width: 100%;
+      }
+    }
+
+    /* Section titles */
+    .section {
+      margin-bottom: 18px;
+    }
+
+    .section-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #9ca3af;
+    }
+
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, #d1d5db, transparent);
+      opacity: 0.8;
+    }
+
+    /* Project cards */
+    .projects {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .project-card {
+      background: var(--card-bg);
+      border-radius: var(--radius-md);
+      padding: 15px 18px 12px;
+      border: 1px solid rgba(209, 213, 219, 0.9);
+      box-shadow: var(--shadow-light);
+    }
+
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+
+    .project-title {
+      font-weight: 600;
+      font-size: 0.98rem;
+      color: var(--text-main);
+    }
+
+    .project-meta {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      white-space: nowrap;
+    }
+
+    .project-desc {
+      font-size: 0.9rem;
+      color: #374151;
+      margin-top: 2px;
+      margin-bottom: 4px;
+    }
+
+    .bullet-list {
+      margin: 5px 0 0 18px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .bullet-list li {
+      margin-bottom: 3px;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 7px;
+    }
+
+    .tag {
+      font-size: 0.75rem;
+      padding: 2px 9px;
+      border-radius: 999px;
+      border: 1px solid #e0e7ff;
+      background: #eef2ff;
+      color: #4338ca;
+      white-space: nowrap;
+    }
+
+    /* Sidebar cards */
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius-md);
+      padding: 14px 16px 13px;
+      border: 1px solid rgba(209, 213, 219, 0.95);
+      box-shadow: var(--shadow-light);
+      margin-bottom: 12px;
+    }
+
+    .card-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #9ca3af;
+      margin-bottom: 6px;
+    }
+
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .skill-pill {
+      font-size: 0.8rem;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: #eff6ff;
+      color: #1d4ed8;
+      white-space: nowrap;
+    }
+
+    .small-text {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+    }
+
+    .small-text + .small-text {
+      margin-top: 4px;
+    }
+
+    .qr-placeholder {
+      margin-top: 8px;
+      padding: 10px 10px;
+      border-radius: 10px;
+      border: 1px dashed #cbd5f5;
+      background: #f8fafc;
+      font-size: 0.8rem;
+      color: #64748b;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- Header -->
+    <div class="header-wrapper">
+      <header class="header">
+        <div class="header-inner">
+          <div class="header-top">
+            <div class="title-block">
+              <div class="title-label">Portfolio</div>
+              <div class="title">Technical Portfolio</div>
+              <div class="name">Yosef Samara</div>
+              <div class="subtitle">Data Science &amp; AI Student &mdash; UC&nbsp;Berkeley &amp; Year Up</div>
+            </div>
+            <div class="status-pill">
+              <span class="status-dot"></span>
+              <span>Hands-on projects in Networking, AI &amp; Machine Learning</span>
+            </div>
+          </div>
+
+          <div class="header-bottom">
+            <div class="header-item">
+              <span class="header-label">Email:</span>
+              <span>yosefsamara@berkeley.edu</span>
+            </div>
+            <div class="header-item">
+              <span class="header-label">Location:</span>
+              <span>Bay Area, CA</span>
+            </div>
+            <!-- Optional: add LinkedIn or GitHub when ready -->
+            <!--
+            <div class="header-item">
+              <span class="header-label">LinkedIn:</span>
+              <a class="link" href="https://www.linkedin.com/in/your-link" target="_blank">
+                linkedin.com/in/your-link
+              </a>
+            </div>
+            -->
+          </div>
+        </div>
+      </header>
+    </div>
+
+    <main class="layout">
+      <!-- Left: Projects -->
+      <section>
+        <div class="section">
+          <div class="section-title-row">
+            <h2 class="section-title">Projects</h2>
+            <div class="section-line"></div>
+          </div>
+        </div>
+
+        <div class="projects">
+          <!-- DS100 Housing -->
+          <article class="project-card">
+            <div class="project-header">
+              <div class="project-title">DS100 &mdash; Housing Price Prediction (Project A1 &amp; A2)</div>
+              <div class="project-meta">Data Science · Regression</div>
+            </div>
+            <p class="project-desc">
+              Built an end-to-end predictive pipeline to model housing prices using real-world data, focusing on feature
+              engineering, model evaluation, and fairness.
+            </p>
+            <ul class="bullet-list">
+              <li>Cleaned and transformed tabular data using Pandas (log transforms, one-hot encoding, interaction features).</li>
+              <li>Trained and compared linear models with regularization; used train/validation splits for model selection.</li>
+              <li>Evaluated performance with error metrics and checked for potential bias across neighborhoods.</li>
+            </ul>
+            <div class="project-tags">
+              <span class="tag">Python</span>
+              <span class="tag">Pandas</span>
+              <span class="tag">Regression</span>
+              <span class="tag">Feature Engineering</span>
+              <span class="tag">Model Evaluation</span>
+            </div>
+          </article>
+
+          <!-- CS168 Traceroute -->
+          <article class="project-card">
+            <div class="project-header">
+              <div class="project-title">CS168 &mdash; Traceroute Implementation (Project 1A &amp; 1B)</div>
+              <div class="project-meta">Computer Networking</div>
+            </div>
+            <p class="project-desc">
+              Implemented a Python version of <strong>traceroute</strong>, including packet parsing and robust handling of real-world network behavior.
+            </p>
+            <ul class="bullet-list">
+              <li>Sent probes with increasing TTL to discover per-hop routers and reconstruct the full path to a destination.</li>
+              <li>Parsed IPv4, ICMP, and UDP headers from raw bytes into structured objects for debugging and logic.</li>
+              <li>Handled invalid packets, packet loss, silent routers, routing loops, and duplicate/delayed responses.</li>
+            </ul>
+            <div class="project-tags">
+              <span class="tag">Python</span>
+              <span class="tag">Sockets</span>
+              <span class="tag">IPv4 / ICMP / UDP</span>
+              <span class="tag">Networking</span>
+              <span class="tag">Error Handling</span>
+            </div>
+          </article>
+
+          <!-- CS188 Search -->
+          <article class="project-card">
+            <div class="project-header">
+              <div class="project-title">CS188 &mdash; Search Algorithms (Project 1)</div>
+              <div class="project-meta">AI · Search</div>
+            </div>
+            <p class="project-desc">
+              Implemented classical search algorithms to solve navigation and path-finding problems in Pacman mazes.
+            </p>
+            <ul class="bullet-list">
+              <li>Implemented DFS, BFS, Uniform Cost Search, and A* using a unified graph-search framework.</li>
+              <li>Designed state representations and successor functions that guarantee completeness and optimality where expected.</li>
+              <li>Used heuristics (e.g., Manhattan distance, corners heuristic) to reduce explored nodes while keeping solutions optimal.</li>
+            </ul>
+            <div class="project-tags">
+              <span class="tag">Python</span>
+              <span class="tag">DFS / BFS / UCS / A*</span>
+              <span class="tag">Heuristic Design</span>
+              <span class="tag">Path Planning</span>
+            </div>
+          </article>
+
+          <!-- CS188 Multi-Agent -->
+          <article class="project-card">
+            <div class="project-header">
+              <div class="project-title">CS188 &mdash; Multi-Agent Pacman (Project 2)</div>
+              <div class="project-meta">AI · Adversarial Search</div>
+            </div>
+            <p class="project-desc">
+              Built intelligent Pacman agents that reason under competition and uncertainty using multi-agent search.
+            </p>
+            <ul class="bullet-list">
+              <li>Implemented Minimax, Alpha-Beta Pruning, and Expectimax for Pacman vs. multiple ghost agents.</li>
+              <li>Designed evaluation functions balancing survival, ghost proximity, food distance, and game score.</li>
+              <li>Optimized tree search depth to keep decisions responsive while exploring meaningful futures.</li>
+            </ul>
+            <div class="project-tags">
+              <span class="tag">Python</span>
+              <span class="tag">Minimax</span>
+              <span class="tag">Alpha-Beta</span>
+              <span class="tag">Expectimax</span>
+              <span class="tag">Game AI</span>
+            </div>
+          </article>
+
+          <!-- DAT402 Breast Cancer -->
+          <article class="project-card">
+            <div class="project-header">
+              <div class="project-title">DAT402 &mdash; Breast Cancer Wisconsin Classification</div>
+              <div class="project-meta">Machine Learning · Health</div>
+            </div>
+            <p class="project-desc">
+              Built a supervised learning pipeline to classify tumors as benign or malignant using the Breast Cancer Wisconsin dataset.
+            </p>
+            <ul class="bullet-list">
+              <li>Preprocessed data (handling missing values and scaling features) to prepare for model training.</li>
+              <li>Trained and compared classification models (e.g., logistic regression, k-NN, others) on validation sets.</li>
+              <li>Used accuracy, precision/recall, and confusion matrices to understand trade-offs in predictions.</li>
+            </ul>
+            <div class="project-tags">
+              <span class="tag">Python</span>
+              <span class="tag">Scikit-learn</span>
+              <span class="tag">Classification</span>
+              <span class="tag">Model Evaluation</span>
+              <span class="tag">Health Data</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Right: Skills & Extras -->
+      <aside>
+        <!-- Skills -->
+        <section class="card">
+          <h2 class="card-title">Skills</h2>
+          <div class="skills-grid">
+            <span class="skill-pill">Python</span>
+            <span class="skill-pill">Pandas</span>
+            <span class="skill-pill">NumPy</span>
+            <span class="skill-pill">Scikit-learn</span>
+            <span class="skill-pill">Matplotlib</span>
+            <span class="skill-pill">Data Cleaning</span>
+            <span class="skill-pill">Feature Engineering</span>
+            <span class="skill-pill">Regression</span>
+            <span class="skill-pill">Classification</span>
+            <span class="skill-pill">Search Algorithms</span>
+            <span class="skill-pill">Minimax / Alpha-Beta</span>
+            <span class="skill-pill">Expectimax</span>
+            <span class="skill-pill">Networking (IP/ICMP/UDP)</span>
+          </div>
+        </section>
+
+        <!-- Profile -->
+        <section class="card">
+          <h2 class="card-title">Profile</h2>
+          <p class="small-text">
+            Data Science and AI student with hands-on experience across algorithms, networking, and applied machine learning.
+          </p>
+          <p class="small-text">
+            Comfortable moving from low-level packet parsing to high-level modeling and evaluation, and explaining results to
+            non-technical stakeholders.
+          </p>
+        </section>
+
+        <!-- Portfolio / QR -->
+        <section class="card">
+          <h2 class="card-title">Portfolio Access</h2>
+          <p class="small-text">
+            Full notebooks, reports, and project artifacts are organized in a Google Drive portfolio folder:
+          </p>
+          <p class="small-text" style="margin-top:4px;">
+            <a class="link" href="https://drive.google.com/drive/folders/1D5_0RvFR5qe-bg7T7MbTVdIzEl2sncg4?usp=drive_link" target="_blank">
+              View full portfolio on Google Drive
+            </a>
+          </p>
+          <div class="qr-placeholder">
+            Optional: generate a QR code for this Drive link using any online QR generator, then replace this box with the
+            downloaded QR image.
+          </div>
+        </section>
+      </aside>
+    </main>
+  </div>
+</body>
+</html>
